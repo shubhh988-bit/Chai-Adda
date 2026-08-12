@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chai Adda — tapri tracks that raised you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- hand-painted signboard ticker -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>★ FRESH CUTTING CHAI ★ ONE MORE ROUND ★ SOUND PE FULL VOLUME ★ FRESH CUTTING CHAI ★ ONE MORE ROUND ★ SOUND PE FULL VOLUME&nbsp;</span>
+      <span>★ FRESH CUTTING CHAI ★ ONE MORE ROUND ★ SOUND PE FULL VOLUME ★ FRESH CUTTING CHAI ★ ONE MORE ROUND ★ SOUND PE FULL VOLUME&nbsp;</span>
+    </div>
+  </div>
+
+  <main class="stage">
+    <header class="hero">
+      <h1 class="hero__title">chai<span>adda</span></h1>
+      <p class="hero__sub">the tapri tracks that raised a generation. ₹10 a cup, priceless playlist.</p>
+    </header>
+
+    <!-- signature element: kettle pours, kulhad fills as the song plays -->
+    <section class="brew" aria-label="Music player">
+      <div class="brew__stage">
+        <div class="steam" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+
+        <svg class="kettle" viewBox="0 0 220 180" aria-hidden="true">
+          <path class="kettle__body" d="M40 90 Q40 60 90 55 L150 55 Q175 55 178 80 L178 130 Q178 160 145 165 L70 165 Q40 160 40 130 Z"/>
+          <path class="kettle__spout" d="M170 78 L205 60 L200 72 L175 92 Z"/>
+          <path class="kettle__handle" d="M55 80 Q30 90 30 115 Q30 140 55 150" fill="none" stroke-width="9" stroke-linecap="round"/>
+          <circle class="kettle__lid" cx="100" cy="50" r="10"/>
+        </svg>
+
+        <button class="play-btn" id="playBtn" aria-pressed="false" aria-label="Pour a round / play music">
+          <svg id="iconPlay" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+
+        <div class="kulhad">
+          <div class="kulhad__fill" id="kulhadFill"></div>
+          <div class="kulhad__rim"></div>
+        </div>
+      </div>
+
+      <p class="now-playing" id="nowPlaying">select a round below to start pouring</p>
+    </section>
+
+    <!-- cassette-dial track selector -->
+    <section class="dial" aria-label="Track selector">
+      <button class="dial__arrow" id="prevBtn" aria-label="Previous track">‹</button>
+      <ol class="dial__tracks" id="trackList" role="listbox"></ol>
+      <button class="dial__arrow" id="nextBtn" aria-label="Next track">›</button>
+    </section>
+
+    <!-- heat level = volume -->
+    <section class="heat" aria-label="Volume">
+      <label for="volume">heat level</label>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
+    </section>
+
+    <audio id="audio" preload="metadata"></audio>
+  </main>
+
+  <footer class="credits">
+    <p>built with html, css &amp; js — drop your own mp3s in <code>/audio</code> and edit the track list in <code>script.js</code></p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

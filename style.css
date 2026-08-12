@@ -1,0 +1,290 @@
+:root {
+  --ink: #3b2417;       /* faded sepia ink - main text */
+  --ink-soft: #6b5138;  /* softer ink for secondary text */
+  --cream: #f1e6c9;     /* aged cream background */
+  --beige: #dfcb9f;     /* deeper beige - panels, cards */
+  --red: #a83f32;       /* faded poster red - primary accent */
+  --red-deep: #7c2c22;  /* deep faded red - shadows, borders */
+  --mustard: #c98a2c;   /* worn gold - highlights, selected state */
+
+  --display: 'Baloo Bhaijaan 2', system-ui, sans-serif;
+  --body: 'Space Grotesk', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% -10%, #f7ecd2 0%, var(--cream) 55%, var(--beige) 100%);
+  color: var(--ink);
+  font-family: var(--body);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 3px solid var(--red-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- ticker ---------- */
+.ticker {
+  overflow: hidden;
+  background: var(--red-deep);
+  border-bottom: 3px solid var(--ink);
+  white-space: nowrap;
+  padding: 6px 0;
+}
+.ticker__track {
+  display: inline-flex;
+  animation: scroll-left 22s linear infinite;
+}
+.ticker__track span {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  padding-right: 1rem;
+}
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---------- hero ---------- */
+.stage {
+  flex: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1rem;
+  width: 100%;
+}
+
+.hero { text-align: center; margin-bottom: 1.5rem; }
+
+.hero__title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 12vw, 4.5rem);
+  line-height: 0.95;
+  margin: 0;
+  color: var(--red);
+  text-shadow: 3px 3px 0 var(--beige);
+}
+.hero__title span {
+  display: block;
+  color: var(--ink);
+  text-shadow: 3px 3px 0 var(--mustard);
+}
+
+.hero__sub {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- brew / signature element ---------- */
+.brew { text-align: center; margin: 1.5rem 0 2rem; }
+
+.brew__stage {
+  position: relative;
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.kettle {
+  width: 130px;
+  height: auto;
+  transform: rotate(-8deg);
+  transform-origin: 70% 90%;
+  transition: transform 0.4s ease;
+}
+.kettle__body { fill: var(--red-deep); }
+.kettle__spout { fill: var(--red-deep); }
+.kettle__handle { stroke: var(--red-deep); }
+.kettle__lid { fill: var(--cream); }
+
+.brew.is-playing .kettle {
+  transform: rotate(-22deg);
+}
+
+.steam {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-10px);
+  width: 40px;
+  height: 60px;
+  pointer-events: none;
+}
+.steam span {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(59, 36, 23, 0.35);
+  opacity: 0;
+}
+.brew.is-playing .steam span {
+  animation: puff 2.2s ease-in infinite;
+}
+.steam span:nth-child(2) { left: 20px; animation-delay: 0.7s; }
+.steam span:nth-child(3) { left: 4px;  animation-delay: 1.4s; }
+
+@keyframes puff {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  20%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-55px) scale(1.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brew.is-playing .steam span { animation: none; opacity: 0.3; }
+  .kettle { transition: none; }
+}
+
+.play-btn {
+  position: relative;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid var(--red);
+  background: var(--cream);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 0 var(--beige);
+}
+.play-btn svg { fill: currentColor; }
+.play-btn:hover { background: var(--red); color: var(--cream); }
+
+.kulhad {
+  position: relative;
+  width: 84px;
+  height: 78px;
+  border-radius: 0 0 40px 40px / 0 0 50px 50px;
+  background: var(--beige);
+  border: 3px solid var(--ink-soft);
+  overflow: hidden;
+}
+.kulhad__rim {
+  position: absolute;
+  top: -3px; left: -3px; right: -3px;
+  height: 10px;
+  background: #e8d4a8;
+  border-bottom: 3px solid var(--ink-soft);
+}
+.kulhad__fill {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 0%;
+  background: linear-gradient(180deg, var(--mustard), var(--red-deep));
+  transition: height 0.3s linear;
+}
+
+.now-playing {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--red-deep);
+  min-height: 1.2em;
+}
+
+/* ---------- cassette dial track list ---------- */
+.dial {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(124, 44, 34, 0.06);
+  border: 1px solid rgba(59, 36, 23, 0.15);
+  border-radius: 14px;
+  padding: 0.5rem;
+}
+
+.dial__arrow {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--red-deep);
+  color: var(--cream);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.dial__arrow:hover { background: var(--mustard); color: var(--ink); }
+
+.dial__tracks {
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem;
+  scroll-snap-type: x proximity;
+}
+
+.dial__tracks .track {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 36, 23, 0.25);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dial__tracks .track[aria-selected="true"] {
+  background: var(--mustard);
+  color: var(--ink);
+  border-color: var(--mustard);
+  font-weight: 600;
+}
+
+/* ---------- volume / heat ---------- */
+.heat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+.heat input[type="range"] {
+  flex: 1;
+  accent-color: var(--red);
+}
+
+/* ---------- footer ---------- */
+.credits {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  padding: 1.5rem 1rem 2rem;
+}
+.credits code {
+  background: rgba(59, 36, 23, 0.08);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
