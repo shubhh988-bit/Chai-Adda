@@ -1,8 +1,8 @@
 // ---- Edit this list with your own tracks ----
 // Put mp3 files in the /audio folder and point "src" at them.
 const TRACKS = [
-  { title: "Aasa Pulla",        src:"audio/track1.mp3"},
-  { title: "Kannazhaga",        src:"audio/track2.mp3"},
+  { title: "Aasa Pulla",        src: "audio/track1.mp3" },
+  { title: "Kannazhaga",        src: "audio/track2.mp3" },
   { title: "Mutta Kalakki",     src: "audio/track3.mp3" },
 ];
 
